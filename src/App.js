@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import Create from "./crd";
 function App() {
+  const [isCreate, setIsCreate] = useState(false);
+  const [isRead, setIsRead] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
+  const setCreate = () => {
+    setIsCreate(true);
+    setIsRead(false);
+    setIsDelete(false);
+  };
+  const setRead = () => {
+    setIsCreate(false);
+    setIsRead(true);
+    setIsDelete(false);
+  };
+  const setDelete = () => {
+    setIsCreate(false);
+    setIsRead(false);
+    setIsDelete(true);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-sm">
+      <div className="d-flex container-sm justify-content-between p-5">
+        <div className="btn btn-primary" onClick={() => setCreate()}>
+          CREATE
+        </div>
+        <div className="btn btn-primary" onClick={() => setRead()}>
+          READ
+        </div>
+        <div className="btn btn-primary" onClick={() => setDelete()}>
+          DELETE
+        </div>
+      </div>
+      <div className="p-5 border">
+        {isCreate && <Create />}
+        {/* {isRead && <Read />} */}
+        {/* {isDelete && <Delete />} */}
+      </div>
     </div>
   );
 }
