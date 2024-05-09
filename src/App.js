@@ -3,21 +3,21 @@ import { Create, Read } from "./crd";
 function App() {
   const [isCreate, setIsCreate] = useState(false);
   const [isRead, setIsRead] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
+  // const [isDelete, setIsDelete] = useState(false);
   const setCreate = () => {
     setIsCreate(true);
     setIsRead(false);
-    setIsDelete(false);
+    // setIsDelete(false);
   };
   const setRead = () => {
     setIsCreate(false);
     setIsRead(true);
-    setIsDelete(false);
+    // setIsDelete(false);
   };
   const setDelete = () => {
     setIsCreate(false);
     setIsRead(false);
-    setIsDelete(true);
+    // setIsDelete(true);
   };
   return (
     <div className="container-sm">
