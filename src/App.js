@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Create from "./crd";
+import { Create, Read } from "./crd";
 function App() {
   const [isCreate, setIsCreate] = useState(false);
   const [isRead, setIsRead] = useState(false);
@@ -34,7 +34,7 @@ function App() {
       </div>
       <div className="p-5 border">
         {isCreate && <Create />}
-        {/* {isRead && <Read />} */}
+        {isRead && <Read />}
         {/* {isDelete && <Delete />} */}
       </div>
     </div>
