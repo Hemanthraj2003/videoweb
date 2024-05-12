@@ -14,7 +14,6 @@ const Fetch = () => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setData(docSnap.data());
-          console.log(data);
         } else {
           console.log("Document does not exist!");
         }
@@ -26,7 +25,9 @@ const Fetch = () => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-
+  useEffect(() => {
+    if (data) console.log(data);
+  }, [data]);
   return (
     <div>
       {data ? (
