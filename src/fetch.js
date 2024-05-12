@@ -14,6 +14,7 @@ const Fetch = () => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setData(docSnap.data());
+          console.log(data);
         } else {
           console.log("Document does not exist!");
         }
