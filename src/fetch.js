@@ -4,7 +4,6 @@ import { db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 const Fetch = () => {
-  let currentUrl;
   const { id } = useParams();
   const [data, setData] = useState(null);
 
@@ -29,8 +28,6 @@ const Fetch = () => {
   useEffect(() => {
     if (data) {
       console.log(data);
-      currentUrl = window.location.href;
-      console.log("Current URL:", currentUrl);
     }
   }, [data]);
   return (
