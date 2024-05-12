@@ -4,6 +4,7 @@ import { db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 const Fetch = () => {
+  let currentUrl;
   const { id } = useParams();
   const [data, setData] = useState(null);
 
@@ -26,7 +27,11 @@ const Fetch = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   useEffect(() => {
-    if (data) console.log(data);
+    if (data) {
+      console.log(data);
+      currentUrl = window.location.href;
+      console.log("Current URL:", currentUrl);
+    }
   }, [data]);
   return (
     <div>
@@ -34,6 +39,8 @@ const Fetch = () => {
         <div>
           <h2>Document Data</h2>
           <pre>{JSON.stringify(data, null, 2)}</pre>
+
+          <a href={"qdisk://" + window.location.href}>Open in QDisk App</a>
         </div>
       ) : (
         <p>Loading...</p>
