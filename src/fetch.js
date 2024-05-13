@@ -30,6 +30,15 @@ const Fetch = () => {
       console.log(data);
     }
   }, [data]);
+  const handleOpenApp = () => {
+    try {
+      // Attempt to open the app via deep link
+      window.location.href = "qdisk://" + window.location.href;
+    } catch (error) {
+      // If an error occurs, redirect the user to the fallback page
+      window.location.href = "/install_app"; // Replace with the URL of your fallback page
+    }
+  };
   return (
     <div>
       {data ? (
@@ -37,7 +46,9 @@ const Fetch = () => {
           <h2>Document Data</h2>
           <pre>{JSON.stringify(data, null, 2)}</pre>
 
-          <a href={"qdisk://" + window.location.href}>Open in QDisk App</a>
+          <button type="button" class="btn btn-warning" onClick={handleOpenApp}>
+            Open in App
+          </button>
         </div>
       ) : (
         <p>Loading...</p>
