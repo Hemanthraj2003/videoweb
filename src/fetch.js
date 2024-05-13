@@ -6,6 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 const Fetch = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [isApp, setIsApp] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,13 +32,23 @@ const Fetch = () => {
     }
   }, [data]);
   const handleOpenApp = () => {
-    try {
-      // Attempt to open the app via deep link
-      window.location.href = "qdisk://" + window.location.href;
-    } catch (error) {
-      // If an error occurs, redirect the user to the fallback page
-      window.location.href = "/install_app"; // Replace with the URL of your fallback page
-    }
+    // Attempt to open the app via deep link
+    window.location.href = "qdisk://" + window.location.href;
+
+    // Set a timeout to check if the deep link was successful after a short delay
+    setTimeout(() => {
+      // Check if the user is still on the current page
+      if (window.location.href.includes("/5fqkiXDtLFTSSLd9XGyN")) {
+        const confirmation = window.confirm(
+          "App not installed. Do you want to install the app?"
+        );
+        if (confirmation) {
+          window.location.href = "/install_app";
+        } else {
+          window.alert("Cannot play without the app!!");
+        }
+      }
+    }, 1200);
   };
   return (
     <div>
