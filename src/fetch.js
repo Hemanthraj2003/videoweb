@@ -6,7 +6,6 @@ import { doc, getDoc } from "firebase/firestore";
 const Fetch = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
-  const [isApp, setIsApp] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
