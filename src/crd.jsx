@@ -27,7 +27,6 @@ export const Read = () => {
         console.error("Failed to copy text to clipboard:", error);
       });
   };
-  const id = "id";
   return (
     <div>
       URL DATA
