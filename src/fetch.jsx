@@ -32,7 +32,7 @@ const Fetch = () => {
 
       return () => clearTimeout(timer);
     }
-  }, [clicked, opened]);
+  }, [clicked, opened, navigate]);
 
   useEffect(() => {
     if (opened) {
@@ -51,9 +51,13 @@ const Fetch = () => {
     <div className="container-fluid p-0">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <button
+            className="navbar-brand btn btn-link"
+            onClick={() => navigate("/")}
+            style={{ textDecoration: "none" }}
+          >
             Q-Player
-          </a>
+          </button>
         </div>
       </nav>
 

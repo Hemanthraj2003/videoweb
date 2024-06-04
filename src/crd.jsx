@@ -4,7 +4,6 @@ import { collection, getDocs } from "firebase/firestore";
 const urlCollectRef = collection(db, "urls");
 
 export const Read = () => {
-  const currentURL = window.location.href;
   const [urlData, setUrlData] = useState([]);
   useEffect(() => {
     const getData = async () => {
@@ -16,7 +15,7 @@ export const Read = () => {
   useEffect(() => {
     console.log(urlData);
   }, [urlData]);
-  const handleCopyButtonClick = (currentURL, docID) => {
+  const handleCopyButtonClick = (docID) => {
     const text = "https://qdisk.netlify.app/id/" + docID;
     navigator.clipboard
       .writeText(text)
@@ -43,7 +42,7 @@ export const Read = () => {
               <button
                 type="button"
                 class="btn btn-primary"
-                onClick={() => handleCopyButtonClick(currentURL, doc.id)}
+                onClick={() => handleCopyButtonClick(doc.id)}
               >
                 Copy Text
               </button>
