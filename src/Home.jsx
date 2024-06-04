@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 const LandingPage = () => {
   const nav = useNavigate();
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -12,7 +13,6 @@ const LandingPage = () => {
       setShowLoginModal(false);
       setError("");
       nav("/secret");
-      // Logic to handle successful login
     } else {
       setError("Incorrect username or password. Please try again.");
     }
@@ -25,9 +25,13 @@ const LandingPage = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <button
+            className="navbar-brand btn btn-link"
+            onClick={() => nav("/")}
+            style={{ textDecoration: "none", color: "#ffd700" }}
+          >
             Q-cloud
-          </a>
+          </button>
           <button
             className="navbar-toggler"
             type="button"
@@ -60,12 +64,14 @@ const LandingPage = () => {
           className="modal"
           tabIndex="-1"
           role="dialog"
-          style={{ display: "block", backgroundColor: "#383838" }}
+          style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         >
           <div className="modal-dialog" role="document">
             <div className="modal-content bg-dark">
               <div className="modal-header">
-                <h5 className="modal-title">Login</h5>
+                <h5 className="modal-title" style={{ color: "#ffd700" }}>
+                  Login
+                </h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -76,7 +82,11 @@ const LandingPage = () => {
               <div className="modal-body">
                 {error && <div className="alert alert-danger">{error}</div>}
                 <div className="mb-3">
-                  <label htmlFor="username" className="form-label">
+                  <label
+                    htmlFor="username"
+                    className="form-label"
+                    style={{ color: "#ffd700" }}
+                  >
                     Username
                   </label>
                   <input
@@ -89,7 +99,11 @@ const LandingPage = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
+                  <label
+                    htmlFor="password"
+                    className="form-label"
+                    style={{ color: "#ffd700" }}
+                  >
                     Password
                   </label>
                   <input
@@ -125,12 +139,8 @@ const LandingPage = () => {
 
       {/* Body Section */}
       <div
-        className="container "
-        style={{
-          //   backgroundColor: "#666",
-          padding: "20px",
-          borderRadius: "5px",
-        }}
+        className="container"
+        style={{ padding: "20px", borderRadius: "5px" }}
       >
         <div className="row">
           <div className="col-lg-12">
