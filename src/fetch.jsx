@@ -1,68 +1,102 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { db } from "./firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Fetch = () => {
-  const { id } = useParams();
-  const [data, setData] = useState(null);
+  const navigate = useNavigate();
+  const [clicked, setClicked] = useState(false);
+  const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const docRef = doc(db, "urls", id);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setData(docSnap.data());
-        } else {
-          console.log("Document does not exist!");
-        }
-      } catch (error) {
-        console.error("Error getting document:", error);
+    const handleVisibilityChange = () => {
+      if (clicked && document.visibilityState === "hidden") {
+        setOpened(true);
       }
     };
 
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [clicked]);
+
   useEffect(() => {
-    if (data) {
-      console.log(data);
-    }
-  }, [data]);
-  const handleOpenApp = () => {
-    // Attempt to open the app via deep link
-    window.location.href = "qdisk://" + window.location.href;
-
-    // Set a timeout to check if the deep link was successful after a short delay
-    setTimeout(() => {
-      // Check if the user is still on the current page
-      if (window.location.href.includes("/5fqkiXDtLFTSSLd9XGyN")) {
-        const confirmation = window.confirm(
-          "App not installed. Do you want to install the app?"
-        );
-        if (confirmation) {
-          window.location.href = "/install_app";
-        } else {
-          window.alert("Cannot play without the app!!");
+    if (clicked) {
+      const timer = setTimeout(() => {
+        if (!opened) {
+          alert("not installed");
+          navigate("/install_app");
         }
-      }
-    }, 1200);
-  };
-  return (
-    <div>
-      {data ? (
-        <div>
-          <h2>Document Data</h2>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+        setClicked(false); // Reset clicked state
+      }, 1000); // Adjust the timeout duration as needed
 
-          <button type="button" class="btn btn-warning" onClick={handleOpenApp}>
-            Open in App
-          </button>
+      return () => clearTimeout(timer);
+    }
+  }, [clicked, opened]);
+
+  useEffect(() => {
+    if (opened) {
+      alert("installed");
+      setClicked(false); // Reset clicked state
+      setOpened(false); // Reset opened state
+    }
+  }, [opened]);
+
+  const handleOpenApp = () => {
+    setClicked(true);
+    window.location.href = "qdisk://" + window.location.href;
+  };
+
+  return (
+    <div className="container-fluid p-0">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            Q-Player
+          </a>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      </nav>
+
+      <div className="bg-black p-5 text-center position-relative">
+        <div
+          className="bg-transparent rounded-circle p-3 mx-auto"
+          style={{ width: "200px", height: "200px" }}
+        >
+          <i
+            className="bi bi-play-circle-fill text-white position-absolute"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              fontSize: "100px",
+            }}
+          ></i>
+        </div>
+        <button
+          type="button"
+          className="btn btn-outline-light btn-lg position-absolute top-50 start-50 translate-middle"
+          onClick={handleOpenApp}
+        >
+          Play
+        </button>
+      </div>
+
+      <div className="text-center my-4">
+        <button
+          type="button"
+          className="btn btn-warning mx-2"
+          onClick={handleOpenApp}
+        >
+          Open in App
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary mx-2"
+          onClick={handleOpenApp}
+        >
+          Play Video
+        </button>
+      </div>
     </div>
   );
 };

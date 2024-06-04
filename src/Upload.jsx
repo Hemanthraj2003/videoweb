@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ProcessData from "./ProcessData.jsx";
 import ListData from "./ListData.jsx";
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -29,11 +28,11 @@ const Upload = () => {
       if (response.ok) {
         alert("Upload Successful");
       }
-      const processedData = await ProcessData(responseData);
-      console.log(processedData);
-      if (processedData) {
+      console.log(responseData);
+      if (responseData) {
         setIsProcessed(true);
-        setData(processedData);
+        const newData = responseData.uploadedResults;
+        setData({ title: newData.fileName, url: newData.url });
       }
     } catch (error) {
       console.log(error);

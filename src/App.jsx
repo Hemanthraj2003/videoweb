@@ -1,24 +1,14 @@
-import { useState } from "react";
-import { Create, Read } from "./crd";
+import { useNavigate } from "react-router-dom";
 function App() {
-  const [isCreate, setIsCreate] = useState(false);
-  const [isRead, setIsRead] = useState(false);
-  // const [isDelete, setIsDelete] = useState(false);
+  const navigate = useNavigate();
+
   const setCreate = () => {
-    setIsCreate(true);
-    setIsRead(false);
-    // setIsDelete(false);
+    navigate("/xyzupload");
   };
   const setRead = () => {
-    setIsCreate(false);
-    setIsRead(true);
-    // setIsDelete(false);
+    navigate("/xyzRead");
   };
-  const setDelete = () => {
-    setIsCreate(false);
-    setIsRead(false);
-    // setIsDelete(true);
-  };
+
   return (
     <div className="container-sm">
       <div className="d-flex container-sm justify-content-between p-5">
@@ -26,17 +16,10 @@ function App() {
           CREATE
         </div>
         <div className="btn btn-primary" onClick={() => setRead()}>
-          READ
-        </div>
-        <div className="btn btn-primary" onClick={() => setDelete()}>
-          DELETE
+          read
         </div>
       </div>
-      <div className="p-5 border">
-        {isCreate && <Create />}
-        {isRead && <Read />}
-        {/* {isDelete && <Delete />} */}
-      </div>
+      <div className="p-5 border"></div>
     </div>
   );
 }
