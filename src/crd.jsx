@@ -17,7 +17,7 @@ export const Read = () => {
     console.log(urlData);
   }, [urlData]);
   const handleCopyButtonClick = (currentURL, docID) => {
-    const text = currentURL + docID;
+    const text = "https://qdisk.netlify.app/id/" + docID;
     navigator.clipboard
       .writeText(text)
       .then(() => {
@@ -27,6 +27,7 @@ export const Read = () => {
         console.error("Failed to copy text to clipboard:", error);
       });
   };
+  const id = "id";
   return (
     <div>
       URL DATA
@@ -37,7 +38,7 @@ export const Read = () => {
             <div className="d-inline-flex flex-row">
               <input
                 type="text"
-                value={`${currentURL}${doc.id}`}
+                value={`qdisk.netlify.app/id/${doc.id}`}
                 className="form-control"
               />
               <button
