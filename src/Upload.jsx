@@ -1,74 +1,78 @@
 import React, { useState } from "react";
-import ListData from "./ListData.jsx";
+import axios from "axios";
+import generatePreSIgnedUrl, { generateDownloadUrl } from "./presign";
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+
+// Import FilePond plugins
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+// Register FilePond plugins
+registerPlugin(FilePondPluginFileValidateType, FilePondPluginImagePreview);
+
 const Upload = () => {
-  const [file, setFile] = useState(null);
-  const [isProcessed, setIsProcessed] = useState(false);
-  const [data, setData] = useState(null);
+  const [files, setFiles] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+  const handleUpload = async () => {
+    setIsUploading(true); // Disable submit button during upload
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!file) {
-      console.log("No file selected");
-      return;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i].file; // Access the file object
+      console.log(file.name, file.type);
+
+      try {
+        const url = await generatePreSIgnedUrl(file.name, file.type);
+        console.log(file.type);
+
+        const response = await axios.put(url, file, {
+          header: {
+            "Content-Type": file.type,
+          },
+          onUploadProgress: (progressEvent) => {
+            const progress = (progressEvent.loaded / progressEvent.total) * 100;
+            files[i].setMetadata("progress", progress);
+          },
+        });
+
+        if (response.status === 200) {
+          await generateDownloadUrl(file.name);
+          console.log(`File ${file.name} uploaded successfully.`);
+        } else {
+          console.log(`Upload of file ${file.name} failed.`);
+        }
+      } catch (error) {
+        console.error(`Error uploading file ${file.name}:`, error);
+      }
     }
 
-    const formData = new FormData();
-    formData.append("video", file);
-
-    try {
-      const response = await fetch("http://localhost:5000/upload", {
-        method: "POST",
-        body: formData,
-      });
-      const responseData = await response.json();
-      if (response.ok) {
-        alert("Upload Successful");
-      }
-      console.log(responseData);
-      if (responseData) {
-        setIsProcessed(true);
-        const newData = responseData.uploadedResults;
-        setData({ title: newData.fileName, url: newData.url });
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    setIsUploading(false); // Re-enable submit button
+    setFiles([]); // Clear FilePond files
+    alert("All files uploaded successfully!"); // Alert success
   };
 
   return (
-    <div className="d-flex w-100 h-100 align-items-center justify-content-center my-5   flex-column">
-      <div className="d-inline-flex flex-column w-100 align-items-center justify-content-center bg-dark p-5">
-        <div className="mb-3 fs-1 text-warning">UPLOAD HERE</div>
-        <div className="input-group mx-5 px-5 w-50">
-          <input
-            type="file"
-            className="form-control"
-            id="inputGroupFile02"
-            name="video"
-            onChange={handleFileChange}
-          />
-          <button
-            type="button"
-            className="input-group-text"
-            onClick={handleSubmit}
-          >
-            Upload
-          </button>
-        </div>
-      </div>
-      <div
-        className="d-flex bg-dark text-white p-5 my-5 overflow-hidden flex-column position-relative rounded-5"
-        style={{ height: "400px", width: "800px" }}
-      >
-        <div>LIST OF URLS</div>
-        <div className="flex-grow-1">
-          {isProcessed && <ListData rawData={data} />}
-        </div>
-      </div>
+    <div>
+      <h1>Upload Files to Cloudflare R2 using Pre-signed URL</h1>
+      <FilePond
+        files={files}
+        allowMultiple={true}
+        onupdatefiles={setFiles}
+        name="files"
+        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+        onprocessfileprogress={(file, progress) => {
+          // Update progress metadata to reflect the upload progress
+          file.setMetadata("progress", progress * 100);
+        }}
+        onprocessfiles={() => {
+          setFiles([]); // Clear files on successful upload
+        }}
+      />
+      <button onClick={handleUpload} disabled={isUploading}>
+        {isUploading ? "Uploading..." : "Submit"}
+      </button>
     </div>
   );
 };
