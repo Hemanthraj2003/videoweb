@@ -1,160 +1,54 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
+import Body from "./Body";
+import { Rights } from "./FotterPages";
 const LandingPage = () => {
-  const nav = useNavigate();
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleLogin = () => {
-    if (username === "QdiskAdmin" && password === "yourpassword") {
-      setShowLoginModal(false);
-      setError("");
-      nav("/secret");
-    } else {
-      setError("Incorrect username or password. Please try again.");
-    }
-  };
-
+  const [currPage, setCurrPage] = useState("Home");
   return (
-    <div
-      style={{ backgroundColor: "#3f403e", color: "#ffd700", height: "100vh" }}
-    >
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container">
-          <button
-            className="navbar-brand btn btn-link"
-            onClick={() => nav("/")}
-            style={{ textDecoration: "none", color: "#ffd700" }}
-          >
-            Q-cloud
-          </button>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <button
-                  className="btn btn-warning"
-                  onClick={() => setShowLoginModal(true)}
-                >
-                  Login
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      {/* Login Modal */}
-      {showLoginModal && (
-        <div
-          className="modal"
-          tabIndex="-1"
-          role="dialog"
-          style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content bg-dark">
-              <div className="modal-header">
-                <h5 className="modal-title" style={{ color: "#ffd700" }}>
-                  Login
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowLoginModal(false)}
-                  style={{ color: "#ffd700" }}
-                ></button>
-              </div>
-              <div className="modal-body">
-                {error && <div className="alert alert-danger">{error}</div>}
-                <div className="mb-3">
-                  <label
-                    htmlFor="username"
-                    className="form-label"
-                    style={{ color: "#ffd700" }}
-                  >
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    style={{ backgroundColor: "#383838", color: "#ffd700" }}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label
-                    htmlFor="password"
-                    className="form-label"
-                    style={{ color: "#ffd700" }}
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    style={{ backgroundColor: "#383838", color: "#ffd700" }}
-                  />
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-warning"
-                  onClick={handleLogin}
-                >
-                  Login
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => setShowLoginModal(false)}
-                >
-                  Close
-                </button>
-              </div>
+    <div className="w-screen h-screen relative  font-mono">
+      <div className="absolute inset-0 h-[170vh] lg:h-screen  w-screen rounded-ee-[15rem] md:rounded-ee-[25rem] bg-[#14ee80] -z-20 "></div>
+      {/* NavBar */}
+      <div className="fixed min-w-full">
+        <div className="flex items-center justify-between bg-[#14ee80] px-5 md:px-9 py-3">
+          <div className="text-3xl font-bold md:ps-[30px]">Q-Cloud</div>
+          <div className="flex justify-evenly items-center w-1/3 md:w-1/2">
+            <div className="hidden md:flex">Home</div>
+            <div className="hidden md:flex">FAQ's</div>
+            <div className="hidden md:flex">Contact Us</div>
+            <div className="bg-slate-900 text-white/70 px-7 py-0.5 flex justify-center rounded-[5px] items-center text-sm w-[100px] h-[2.5rem]">
+              <div>Login</div>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Body Section */}
-      <div
-        className="container"
-        style={{ padding: "20px", borderRadius: "5px" }}
-      >
-        <div className="row">
-          <div className="col-lg-12">
-            <h2>Welcome to Q-cloud</h2>
-            <p className="lead">
-              Q-cloud is a video hosting platform that helps users monetize
-              their videos. With our platform, you can earn money based on the
-              traffic to your videos. Whether you're a content creator,
-              influencer, or business owner, Q-cloud provides you with the tools
-              you need to succeed.
-            </p>
-            <p className="lead">
-              Sign up today and start earning money from your videos!
-            </p>
+      </div>
+      {currPage === "Home" && <Body />}
+      {currPage === "Rights" && <Rights />}
+      {/* Footer */}
+      <div className="bg-slate-800 text-slate-300 pt-10  md:py-20 pb-10 px-3 md:px-36 cursor-pointer">
+        <div className="flex flex-col md:flex-row justify-evenly items-center gap-5 md:gap-0">
+          <div className="hover:text-white" onClick={() => setCurrPage("Home")}>
+            Home
+          </div>
+          <div
+            className="hover:text-white"
+            onClick={() => setCurrPage("Rights")}
+          >
+            Copyright Policy
+          </div>
+          <div className="hover:text-white" onClick={() => setCurrPage("T&C")}>
+            Terms & Conditions
+          </div>
+          <div
+            className="hover:text-white"
+            onClick={() => setCurrPage("Policy")}
+          >
+            Privacy Policy
+          </div>
+          <div
+            className="hover:text-white"
+            onClick={() => setCurrPage("Contact")}
+          >
+            Contact
           </div>
         </div>
       </div>

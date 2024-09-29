@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Fetch from "./fetch";
+import "./index.css";
 import InstallPage from "./InstallPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Upload from "./Upload";
+// import Upload from "./Upload";
 import Home from "./Home";
 import { Read } from "./crd";
 const NotFoundPage = () => {
@@ -23,10 +24,9 @@ root.render(
         <Route path="/" element={<Home />} />
         {/* install app page */}
         <Route path="/install_app" element={<InstallPage />} />
-        {/* uploadpage */}
-        <Route path="/upload" element={<Upload />} />
         {/* dashboard page */}
         <Route path="/Read" element={<Read />} />
+        {/* 404 */}
         <Route path="*" element={<NotFoundPage />} />
         {/* video landing page */}
         <Route path="/id/:id" element={<Fetch />} />
