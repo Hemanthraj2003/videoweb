@@ -8,7 +8,9 @@ export const NativeBanner = () => {
     script.async = true;
     script.setAttribute("data-cfasync", "false");
 
-    const ads = document.getElementById("nativeBanner");
+    const ads = document.getElementById(
+      "container-0843dcd6a04a91e68d695a784d15cc2c"
+    );
     if (ads) {
       ads.appendChild(script);
     }
@@ -20,5 +22,9 @@ export const NativeBanner = () => {
     };
   }, []);
 
-  return <div id="nativeBanner"></div>;
+  return (
+    <div id="nativeBanner">
+      <div id="container-0843dcd6a04a91e68d695a784d15cc2c"></div>
+    </div>
+  );
 };
