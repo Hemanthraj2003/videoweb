@@ -7,10 +7,10 @@ const LandingPage = () => {
   const [isContact, setIsContact] = useState(false);
   return (
     <div className="w-screen h-screen relative  font-mono cursor-default">
-      <div className="absolute inset-0 h-[170vh] lg:h-screen  w-screen rounded-ee-[15rem] md:rounded-ee-[25rem] bg-[#14ee80] -z-20 "></div>
+      <div className="absolute inset-0 h-[170vh] lg:h-screen  w-screen rounded-ee-[15rem] md:rounded-ee-[25rem] bg-[#74fdff] -z-20 "></div>
       {/* NavBar */}
       <div className="fixed min-w-full">
-        <div className="flex items-center justify-between bg-[#14ee80] px-5 md:px-9 py-3">
+        <div className="flex items-center justify-between bg-[#74fdff] px-5 md:px-9 py-3">
           <a href="#Home">
             <div className="text-3xl font-bold md:ps-[30px]">Q-Cloud</div>
           </a>

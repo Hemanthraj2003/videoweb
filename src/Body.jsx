@@ -70,7 +70,7 @@ const Body = ({ setIsContact }) => {
             to focus on what you love, creating outstanding content..
           </div>
           <div
-            className="bg-[#14ee80] text-black/80 p-5 w-full md:w-1/3 font-black text-center rounded-2xl mt-8 cursor-pointer"
+            className="bg-[#74fdff] text-black/80 p-5 w-full md:w-1/3 font-black text-center rounded-2xl mt-8 cursor-pointer"
             onClick={() => setIsContact(true)}
           >
             Get Started Now &nbsp; {">"}
@@ -88,7 +88,7 @@ const Body = ({ setIsContact }) => {
             Earnings
           </div>
           <div
-            className="bg-[#14ee80] text-black/80 p-5 w-full md:w-1/2 font-black text-center rounded-2xl mt-8 cursor-pointer"
+            className="bg-[#74fdff] text-black/80 p-5 w-full md:w-1/2 font-black text-center rounded-2xl mt-8 cursor-pointer"
             onClick={() => setIsContact(true)}
           >
             Get In Touch With Us &nbsp; {">"}

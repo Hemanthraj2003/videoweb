@@ -3,7 +3,7 @@ import React from "react";
 export const Rights = () => {
   return (
     <div
-      className="flex flex-col p-4  bg-[#14ee80] md:p-40 justify-center py-28 md:pt-20 min-h-screen text-justify"
+      className="flex flex-col p-4  bg-[#74fdff] md:p-40 justify-center py-28 md:pt-20 min-h-screen text-justify"
       id="Home"
     >
       <span className="text-black font-bold md:font-thin text-3xl  md:text-6xl mb-6">
@@ -63,7 +63,7 @@ export const Rights = () => {
 export const TnC = () => {
   return (
     <div
-      className="flex flex-col p-4  bg-[#14ee80] md:p-40 justify-center py-28 md:pt-20 min-h-screen text-justify"
+      className="flex flex-col p-4  bg-[#74fdff] md:p-40 justify-center py-28 md:pt-20 min-h-screen text-justify"
       id="Home"
     >
       <span className="font-bold text-4xl">Terms & Conditions: </span> <br />
@@ -189,9 +189,9 @@ export const TnC = () => {
 export const Contact = ({ setIsContact }) => {
   return (
     <div className="fixed flex-grow-0 flex-shrink-0 inset-0 z-40 flex items-center justify-center bg-black/20">
-      <div className="relative bg-slate-800 md:bg-[#14ee80]  p-8 rounded-xl">
+      <div className="relative bg-slate-800 md:bg-[#74fdff]  p-8 rounded-xl">
         <button
-          className="absolute top-2 right-2 text-slate-800 md:text-white bg-[#14ee80] md:bg-slate-800 py-2 px-5 rounded-full hover:bg-red-600"
+          className="absolute top-2 right-2 text-slate-800 md:text-white bg-[#74fdff] md:bg-slate-800 py-2 px-5 rounded-full hover:bg-red-600"
           onClick={() => setIsContact(false)}
         >
           ✕
@@ -202,7 +202,7 @@ export const Contact = ({ setIsContact }) => {
         <div className="my-6 text-white md:text-black">
           Contact us at any time through Telegram
         </div>
-        <div className="bg-[#14ee80] md:bg-slate-800 text-black/70 md:text-white/80 p-5 w-full font-black text-center rounded-2xl mt-4 text-sm md:text-lg ">
+        <div className="bg-[#74fdff] md:bg-slate-800 text-black/70 md:text-white/80 p-5 w-full font-black text-center rounded-2xl mt-4 text-sm md:text-lg ">
           Get In Touch With Us &nbsp; {">"}
         </div>
       </div>
