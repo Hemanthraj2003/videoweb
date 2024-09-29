@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Body from "./Body";
 import { Contact, Rights, TnC } from "./FotterPages";
+import { NativeBanner } from "./Ads";
 const LandingPage = () => {
   const [currPage, setCurrPage] = useState("Home");
   const [isContact, setIsContact] = useState(false);
@@ -48,6 +49,7 @@ const LandingPage = () => {
       {currPage === "T&C" && <TnC />}
       {currPage === "Policy" && <TnC />}
       {isContact && <Contact setIsContact={setIsContact} />}
+      <NativeBanner />
       {/* Footer */}
       <div className="bg-slate-800 text-slate-300 pt-10  md:py-20 pb-10 px-3 md:px-36 cursor-pointer">
         <div className="flex flex-col md:flex-row justify-evenly items-center gap-5 md:gap-0">
