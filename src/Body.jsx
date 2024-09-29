@@ -4,13 +4,13 @@ import Qplayer from "./images/qplayer.jpg";
 import money from "./images/01.png";
 import support from "./images/support.png";
 
-const Body = () => {
+const Body = ({ setIsContact }) => {
   return (
     <div>
       {" "}
       {/* Introduction */}
       <div className="pt-16 px-9 min-h-screen">
-        <div className="flex flex-col md:flex-row justify-evenly">
+        <div className="flex flex-col md:flex-row justify-evenly" id="Home">
           <div className="w-full xl:w-1/2 flex flex-col lg:px-28  justify-start mt-10 lg:mt-20">
             <div className="text-xl lg:pt-8">
               Start Monetizing Your Video Content from First day
@@ -23,7 +23,10 @@ const Body = () => {
               platform. Experience seamless video delivery and unlock new
               revenue streams.
             </div>
-            <div className="bg-slate-900 p-5 w-1/2 md:w-1/3 text-white/70 text-center rounded-2xl mt-8">
+            <div
+              className="bg-slate-900 p-5 w-1/2 md:w-1/3 text-white/70 text-center rounded-2xl mt-8 cursor-pointer"
+              onClick={() => setIsContact(true)}
+            >
               Contact Us
             </div>
           </div>
@@ -66,7 +69,10 @@ const Body = () => {
             guarantees the best user experience by minimizing ads, allowing you
             to focus on what you love, creating outstanding content..
           </div>
-          <div className="bg-[#14ee80] text-black/80 p-5 w-full md:w-1/3 font-black text-center rounded-2xl mt-8">
+          <div
+            className="bg-[#14ee80] text-black/80 p-5 w-full md:w-1/3 font-black text-center rounded-2xl mt-8 cursor-pointer"
+            onClick={() => setIsContact(true)}
+          >
             Get Started Now &nbsp; {">"}
           </div>
         </div>
@@ -81,7 +87,10 @@ const Body = () => {
             Q-Cloud Provides Personal Support and help on How to Improve your
             Earnings
           </div>
-          <div className="bg-[#14ee80] text-black/80 p-5 w-full md:w-1/2 font-black text-center rounded-2xl mt-8">
+          <div
+            className="bg-[#14ee80] text-black/80 p-5 w-full md:w-1/2 font-black text-center rounded-2xl mt-8 cursor-pointer"
+            onClick={() => setIsContact(true)}
+          >
             Get In Touch With Us &nbsp; {">"}
           </div>
         </div>
