@@ -11,9 +11,9 @@ const Body = ({ setIsContact }) => {
       {/* Introduction */}
       <div className="pt-16 px-9 min-h-screen">
         <div className="flex flex-col md:flex-row justify-evenly" id="Home">
-          <div className="w-full xl:w-1/2 flex flex-col lg:px-28  justify-start mt-10 lg:mt-20">
-            <div className="bg-white rounded-lg p-3 text-center mb-5 md:mb-0">
-              Made With Love ❤️ and Loyalty
+          <div className="w-full xl:w-1/2 flex flex-col lg:px-28  justify-start mt-8 ">
+            <div className="bg-white/70 rounded-lg p-3 text-center mb-5 md:mb-0 font-[cursive] font-[500] text-slate-600 text-xl w-3/4 lg:ms-10">
+              Made With Love and Loyalty
             </div>
             <div className="text-xl lg:pt-8">
               Start Monetizing Your Video Content from First day
